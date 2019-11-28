@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+</head>
+<body>
+    <header>
+        <nav class="navbar bg-dark mb-3">
+            <div class="container ">
+                <h1 class="text-light">Welcome {{fn}}</h1>
+                <a class="text-light" href="/travels">Home</a>
+                <a class="text-light" href="/logout">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>Add a Trip</h1>
+                    <form class="form-group" action="/travels/create" method="POST">
+                        {% csrf_token %}
+                    <p>Destination <input class="form-control" type="text" name="dest" ></p>
+                    <p>Description <textarea class="form-control" name="desc"cols="30" rows="10"></textarea></p>
+                    <p>Travel Date From: <input class="form-control" type="date" name="sd"></p>
+                    <p>Travel Date To: <input class="form-control" type="date" name="ed"></p>
+                    <input class="form-control" type="submit" value="Add">
+                    </form>
+                    {% if messages %}
+                    <ul class="messages text-danger">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

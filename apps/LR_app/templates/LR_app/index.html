@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar bg-dark mb-3">
+            <div class="container ">
+                <h1 class="text-light">Welcome</h1>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row justify-content-around">
+        <div class="reg col-md-4">
+                <h1>Registration</h1>
+                <form  class="form-group" action="/create" method="post">
+                    {% csrf_token %}    
+                    <p>Name: <input class="form-control" type="text" name="name"></p>
+                    <p>Username: <input class="form-control" type="text" name="username"></p>
+                    <p>Password: <input class="form-control" type="password" name="pw"></p>
+                    <p>Confirm Password: <input class="form-control" type="password" name="pw_confirmed"></p>
+                    <input class="form-control btn-dark" type="submit" value="Register">
+                </form>
+                {% if messages %}
+                <ul class="messages text-danger">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="login col-md-4">
+                <h1>Login</h1>
+                <form  class="form-group" action="/login" method="post">
+                    {% csrf_token %}
+                    <p>Username: <input class="form-control" type="text" name="username"></p>
+                    <p>Password: <input  class="form-control"type="password" name="pw"></p>
+                    <input  class="form-control btn-dark" type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

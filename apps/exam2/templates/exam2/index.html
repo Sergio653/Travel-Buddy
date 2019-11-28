@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+</head>
+<body>
+    <header>
+        <nav class="navbar bg-dark mb-3">
+            <div class="container ">
+                <h1 class="text-light">Welcome {{fn}}</h1>
+                <a class="text-light" href="/logout">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>Your Trip Schedule</h1>
+                    <table class="table jumbotron">
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Travel Start Date</th>
+                                <th>Travel End Date</th>
+                                <th>Plan</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for t in travels %}
+                            <tr>
+                                <td><a href="/travels/destination/{{t.id}}">{{t.destinations}}</a> </td>
+                                <td>{{t.sDate}} </td>
+                                <td>{{t.eDate}}</td>
+                                <td>{{t.plan}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h1>Other Trip Schedule</h1>
+                    <table class="table jumbotron">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Destination</th>
+                                <th>Travel Start Date</th>
+                                <th>Travel End Date</th>
+                                <th>Join</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for o in other%}
+                            <tr>
+                                <td>{{o.uploadeder.name}}</td>
+                                <td><a href="/travels/destination/{{o.id}}">{{o.destinations}}</a></td>
+                                <td>{{o.sDate}} </td>
+                                <td>{{o.eDate}}</td>
+                                <td><form class="form-group" action="/travels/join" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="travel_id" value="{{o.id}}">
+                                    <input class="form-control" type="submit" value="Join!">
+                                </form></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <footer>
+                    <a href="/travels/add"><button>Add Travel Plan</button></a>
+            </footer>
+        </div>
+
+    </main>
+</body>
+</html>

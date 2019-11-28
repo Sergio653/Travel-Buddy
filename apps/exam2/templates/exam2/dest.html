@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+            <nav class="navbar bg-dark mb-3">
+                <div class="container ">
+                    <h1 class="text-light">Welcome {{fn}}</h1>
+                    <a class="text-light" href="/travels">Home</a>
+                    <a class="text-light" href="/logout">Logout</a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container jumbotron">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="display-4 mb-4">{{dest}} </h1>
+                        <p>Planned By: {{dFn}}  </p>
+                        <p>Description: {{plan}} </p>
+                        <p>Travel Date From: {{sd}} </p>
+                        <p>Travel Date To: {{ed}} </p>
+                        
+                    </div>
+                </div>
+                <div class=" mt-5 row">
+                    <div class="col">
+                        <hr class="my-4">
+                        <h1 class="display-4 mb-4">Other Users' Joining the Trip!</h1>
+                        {% for t in travelers %}
+                        <ul>
+                            <li>{{t.name}} </li>
+                        </ul>
+                        {% endfor%}
+                    </div>
+                </div>
+            </div>
+        </main>
+</body>
+</html>
